@@ -26,7 +26,7 @@ iosApp (SwiftUI)          androidApp (Compose)
 | feature | `feature/` | ViewModels that expose `StateFlow` |
 | app | `androidApp/`, `iosApp/` | theme, routing, widgets, string catalogs |
 
-A ViewModel talks to a domain interface and `AppVersionReader`. It does not construct an `HttpClient`.
+A ViewModel talks to a domain interface and `AppVersionReader`. Koin supplies HTTP, cache, and reporters. `HttpClientFactory` installs JSON plus 15s request timeouts.
 
 ## Adding a feature
 

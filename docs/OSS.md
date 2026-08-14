@@ -1,6 +1,6 @@
 # OSS map
 
-Search date: 2026-08-15. Starred-repo pass run with `list_starred.py` for KMP / Ktor / SQLDelight / Koin / Kermit / settings / Native UI. Authenticated GitHub user: `kiyo9w`.
+Search date: 2026-08-15. Starred-repo pass run with `list_starred.py` for KMP / Ktor / SQLDelight / Koin / Kermit / settings / Native UI. Authenticated GitHub user: `kiyo9w`. Stack freeze is `docs/decisions/ADR-001-native-stack.md`.
 
 The only starred hit that solves a named core is [Kotlin/KMP-App-Template-Native](https://github.com/Kotlin/KMP-App-Template-Native). The rest of the stack was already in this tree from the public KMP catalog. Public `gh search` on the leftover cores returned no better starter to replace the rewrite.
 
@@ -25,7 +25,7 @@ This kit started from that official native template and then took the smallest p
 | Multi languages | native strings, English source, Vietnamese second locale | leave-native | `values-vi`, xcstrings |
 | Unit tests | commonTest domain + repository + session. jvmTest real SQLDelight schema. iOS Kotlin tests compile | depend | `commonTest/`, `jvmTest/` |
 | Integration test | CI assemble / compile is the substitute while this machine's simulator OOMs | steal-pattern | `.github/workflows/` |
-| Flutter CI | GitHub Actions Android + iOS | steal-pattern | `build-android.yml`, `build-ios.yml` |
+| Flutter CI | GitHub Actions: Android on ubuntu (`jvmTest` + assemble), iOS on macos | steal-pattern | `build-android.yml`, `build-ios.yml` |
 | Flavors | `Flavor.Debug` / `Staging` / `Prod` selected by the apps | leave-local | `core/AppConfig.kt` |
 | Native device API (kit extra) | `AppVersionReader` via official PackageManager + Bundle | leave-native | `platform/` |
 

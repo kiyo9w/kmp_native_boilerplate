@@ -126,6 +126,9 @@ iOS: set `APP_ENVIRONMENT` in `iosApp/Configuration/Config.xcconfig`.
 ## Docs
 
 - `docs/ADOPT.md` — clone, rename, delete sample, first feature, native-bridge prompt
+- `docs/CODING.md` — how to add a feature without drifting the architecture
 - `docs/ARCHITECTURE.md` — layers, navigation, persistence, flavors, device APIs
 - `docs/OSS.md` — Flutter-row table and every dependency
+- `docs/decisions/ADR-001-native-stack.md` — why this stack stays
 - `AGENTS.md` — kit locks for the next agent
+- `.grok/skills/` — `add-kmp-feature`, `add-native-bridge`, `kmp-native-guard` (Claude loads the same files via `.claude/skills/` symlinks)
