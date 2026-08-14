@@ -1,0 +1,19 @@
+CREATE TABLE catalogItem (
+    id INTEGER NOT NULL PRIMARY KEY,
+    imageUrl TEXT NOT NULL,
+    breed TEXT NOT NULL,
+    source TEXT NOT NULL
+);
+
+selectAll:
+SELECT * FROM catalogItem ORDER BY breed ASC;
+
+selectById:
+SELECT * FROM catalogItem WHERE id = ?;
+
+insert:
+INSERT OR REPLACE INTO catalogItem(id, imageUrl, breed, source)
+VALUES (?, ?, ?, ?);
+
+deleteAll:
+DELETE FROM catalogItem;

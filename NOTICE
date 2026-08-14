@@ -1,0 +1,9 @@
+This repository started from the official Kotlin Multiplatform native-UI template:
+
+  https://github.com/Kotlin/KMP-App-Template-Native
+
+Copyright JetBrains s.r.o. and Kotlin Multiplatform contributors.
+Licensed under the Apache License, Version 2.0.
+
+This is a new project, not a GitHub fork. Shared Kotlin structure, native
+shells, and sample feature were rewritten for a Flutter-boilerplate-style kit.

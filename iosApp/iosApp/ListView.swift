@@ -1,0 +1,75 @@
+import SwiftUI
+import KMPNativeCoroutinesAsync
+import KMPObservableViewModelSwiftUI
+import Shared
+
+struct CatalogListView: View {
+    @StateViewModel
+    var viewModel = CatalogListViewModel(
+        catalogRepository: KoinDependencies().catalogRepository
+    )
+
+    let columns = [
+        GridItem(.adaptive(minimum: 140), alignment: .top)
+    ]
+
+    var body: some View {
+        NavigationStack {
+            Group {
+                if !viewModel.items.isEmpty {
+                    ScrollView {
+                        LazyVGrid(columns: columns, alignment: .leading, spacing: 16) {
+                            ForEach(viewModel.items, id: \.id) { item in
+                                NavigationLink(destination: CatalogDetailView(itemId: item.id)) {
+                                    CatalogFrame(item: item)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                } else if viewModel.isRefreshing {
+                    ProgressView()
+                } else {
+                    Text(viewModel.errorMessage ?? "Nothing cached yet. Pull to refresh.")
+                        .foregroundStyle(.secondary)
+                        .multilineTextAlignment(.center)
+                        .padding()
+                }
+            }
+            .navigationTitle("KMP Boilerplate")
+            .refreshable { viewModel.refresh() }
+        }
+    }
+}
+
+struct CatalogFrame: View {
+    let item: CatalogItem
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 4) {
+            AsyncImage(url: URL(string: item.imageUrl)) { phase in
+                switch phase {
+                case .empty:
+                    ProgressView()
+                        .frame(maxWidth: .infinity)
+                        .aspectRatio(1, contentMode: .fit)
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .aspectRatio(1, contentMode: .fill)
+                        .clipped()
+                default:
+                    Color.secondary.opacity(0.15)
+                        .aspectRatio(1, contentMode: .fit)
+                }
+            }
+            Text(item.breed)
+                .font(.headline)
+            Text(item.source)
+                .font(.caption)
+                .foregroundStyle(.secondary)
+        }
+    }
+}

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">KMP Boilerplate</string>
+    <string name="back">Back</string>
+    <string name="no_data_available">Nothing cached yet. Pull to refresh.</string>
+    <string name="label_source">Source: %1$s</string>
+    <string name="label_id">Id: %1$s</string>
+</resources>
