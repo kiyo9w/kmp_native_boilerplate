@@ -1,3 +1,4 @@
 TEAM_ID=
 BUNDLE_ID=dev.kiyo9w.kmpboilerplate
 APP_NAME=KMP Boilerplate
+APP_ENVIRONMENT=debug

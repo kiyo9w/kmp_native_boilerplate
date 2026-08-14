@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">KMP Boilerplate</string>
+    <string name="back">Quay lai</string>
+    <string name="no_data_available">Chua co cache. Keo de tai lai.</string>
+    <string name="label_source">Nguon: %1$s</string>
+    <string name="label_id">Ma: %1$s</string>
+    <string name="label_version">Phien ban %1$s (%2$s)</string>
+</resources>

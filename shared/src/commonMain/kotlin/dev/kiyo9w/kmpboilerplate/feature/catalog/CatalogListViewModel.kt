@@ -7,6 +7,9 @@ import com.rickclephas.kmp.observableviewmodel.stateIn
 import dev.kiyo9w.kmpboilerplate.core.AppResult
 import dev.kiyo9w.kmpboilerplate.domain.catalog.CatalogItem
 import dev.kiyo9w.kmpboilerplate.domain.catalog.CatalogRepository
+import dev.kiyo9w.kmpboilerplate.domain.session.SessionStore
+import dev.kiyo9w.kmpboilerplate.platform.AppVersion
+import dev.kiyo9w.kmpboilerplate.platform.AppVersionReader
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -14,7 +17,11 @@ import kotlinx.coroutines.flow.asStateFlow
 
 class CatalogListViewModel(
     private val catalogRepository: CatalogRepository,
+    private val sessionStore: SessionStore,
+    appVersionReader: AppVersionReader,
 ) : ViewModel() {
+    val appVersion: AppVersion = appVersionReader.current()
+
     @NativeCoroutinesState
     val items: StateFlow<List<CatalogItem>> =
         catalogRepository.observeItems()
@@ -29,6 +36,7 @@ class CatalogListViewModel(
     val errorMessage: StateFlow<String?> = _errorMessage.asStateFlow()
 
     init {
+        sessionStore.setLastRoute(ROUTE_CATALOG)
         refresh()
     }
 
@@ -41,5 +49,9 @@ class CatalogListViewModel(
             }
             _isRefreshing.value = false
         }
+    }
+
+    private companion object {
+        const val ROUTE_CATALOG = "catalog"
     }
 }

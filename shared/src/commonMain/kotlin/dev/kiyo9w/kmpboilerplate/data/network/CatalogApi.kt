@@ -3,6 +3,7 @@ package dev.kiyo9w.kmpboilerplate.data.network
 import dev.kiyo9w.kmpboilerplate.core.AppConfig
 import dev.kiyo9w.kmpboilerplate.core.AppLog
 import dev.kiyo9w.kmpboilerplate.core.AppResult
+import dev.kiyo9w.kmpboilerplate.core.Flavor
 import io.ktor.client.HttpClient
 import io.ktor.client.call.body
 import io.ktor.client.request.get
@@ -21,7 +22,7 @@ internal data class DogCeoResponse(
 
 class KtorCatalogApi(
     private val client: HttpClient,
-    private val baseUrl: String = AppConfig.catalogBaseUrl,
+    private val baseUrl: String = Flavor.DEFAULT_CATALOG_BASE_URL,
     private val pageSize: Int = AppConfig.catalogPageSize,
 ) : CatalogApi {
     override suspend fun fetchImageUrls(): AppResult<List<String>> {

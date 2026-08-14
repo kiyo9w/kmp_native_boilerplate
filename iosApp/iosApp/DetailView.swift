@@ -6,7 +6,8 @@ import Shared
 struct CatalogDetailView: View {
     @StateViewModel
     var viewModel = CatalogDetailViewModel(
-        catalogRepository: KoinDependencies().catalogRepository
+        catalogRepository: KoinDependencies().catalogRepository,
+        sessionStore: KoinDependencies().sessionStore
     )
 
     let itemId: Int64
@@ -31,8 +32,8 @@ struct CatalogDetailView: View {
                         VStack(alignment: .leading, spacing: 6) {
                             Text(item.breed)
                                 .font(.title)
-                            Text("Source: \(item.source)")
-                            Text("Id: \(item.id)")
+                            Text(String(format: String(localized: "label_source"), item.source))
+                            Text(String(format: String(localized: "label_id"), String(item.id)))
                         }
                         .padding(16)
                     }

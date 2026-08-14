@@ -23,6 +23,8 @@ kotlin {
         }
     }
 
+    jvm()
+
     listOf(
         iosArm64(),
         iosSimulatorArm64()
@@ -42,6 +44,11 @@ kotlin {
             implementation(libs.ktor.client.darwin)
             implementation(libs.sqldelight.native.driver)
         }
+        jvmTest.dependencies {
+            implementation(libs.sqldelight.sqlite.driver)
+            implementation(libs.kotlinx.coroutines.test)
+            implementation(kotlin("test"))
+        }
         commonMain.dependencies {
             implementation(libs.ktor.client.core)
             implementation(libs.ktor.client.content.negotiation)
@@ -58,6 +65,7 @@ kotlin {
         }
         commonTest.dependencies {
             implementation(libs.kotlinx.coroutines.test)
+            implementation(libs.multiplatform.settings.test)
             implementation(kotlin("test"))
         }
 

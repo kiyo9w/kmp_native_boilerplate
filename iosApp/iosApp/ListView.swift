@@ -6,7 +6,9 @@ import Shared
 struct CatalogListView: View {
     @StateViewModel
     var viewModel = CatalogListViewModel(
-        catalogRepository: KoinDependencies().catalogRepository
+        catalogRepository: KoinDependencies().catalogRepository,
+        sessionStore: KoinDependencies().sessionStore,
+        appVersionReader: KoinDependencies().appVersionReader
     )
 
     let columns = [
@@ -31,13 +33,26 @@ struct CatalogListView: View {
                 } else if viewModel.isRefreshing {
                     ProgressView()
                 } else {
-                    Text(viewModel.errorMessage ?? "Nothing cached yet. Pull to refresh.")
+                    Text(viewModel.errorMessage ?? String(localized: "no_data_available"))
                         .foregroundStyle(.secondary)
                         .multilineTextAlignment(.center)
                         .padding()
                 }
             }
-            .navigationTitle("KMP Boilerplate")
+            .navigationTitle(String(localized: "app_name"))
+            .navigationBarTitleDisplayMode(.large)
+            .safeAreaInset(edge: .bottom) {
+                Text(
+                    String(
+                        format: String(localized: "label_version"),
+                        viewModel.appVersion.name,
+                        viewModel.appVersion.build
+                    )
+                )
+                .font(.caption)
+                .foregroundStyle(.secondary)
+                .padding(.bottom, 8)
+            }
             .refreshable { viewModel.refresh() }
         }
     }

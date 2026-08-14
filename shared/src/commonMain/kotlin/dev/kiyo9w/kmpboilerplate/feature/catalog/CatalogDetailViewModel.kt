@@ -5,6 +5,7 @@ import com.rickclephas.kmp.observableviewmodel.ViewModel
 import com.rickclephas.kmp.observableviewmodel.stateIn
 import dev.kiyo9w.kmpboilerplate.domain.catalog.CatalogItem
 import dev.kiyo9w.kmpboilerplate.domain.catalog.CatalogRepository
+import dev.kiyo9w.kmpboilerplate.domain.session.SessionStore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,6 +15,7 @@ import kotlinx.coroutines.flow.flowOf
 
 class CatalogDetailViewModel(
     private val catalogRepository: CatalogRepository,
+    private val sessionStore: SessionStore,
 ) : ViewModel() {
     private val itemId = MutableStateFlow<Long?>(null)
 
@@ -27,5 +29,6 @@ class CatalogDetailViewModel(
 
     fun setId(id: Long) {
         itemId.value = id
+        sessionStore.setLastRoute("catalog/$id")
     }
 }

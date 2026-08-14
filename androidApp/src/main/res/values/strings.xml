@@ -4,4 +4,5 @@
     <string name="no_data_available">Nothing cached yet. Pull to refresh.</string>
     <string name="label_source">Source: %1$s</string>
     <string name="label_id">Id: %1$s</string>
+    <string name="label_version">Version %1$s (%2$s)</string>
 </resources>

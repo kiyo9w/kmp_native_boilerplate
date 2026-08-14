@@ -46,7 +46,23 @@ fun CatalogListScreen(navigateToDetails: (itemId: Long) -> Unit) {
     val error by viewModel.errorMessage.collectAsStateWithLifecycle()
 
     Scaffold(
-        topBar = { TopAppBar(title = { Text(stringResource(R.string.app_name)) }) },
+        topBar = {
+            TopAppBar(
+                title = {
+                    Column {
+                        Text(stringResource(R.string.app_name))
+                        Text(
+                            stringResource(
+                                R.string.label_version,
+                                viewModel.appVersion.name,
+                                viewModel.appVersion.build,
+                            ),
+                            style = MaterialTheme.typography.labelSmall,
+                        )
+                    }
+                },
+            )
+        },
     ) { padding ->
         PullToRefreshBox(
             isRefreshing = refreshing,

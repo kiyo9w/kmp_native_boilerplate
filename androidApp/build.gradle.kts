@@ -35,14 +35,23 @@ android {
         versionCode = 1
         versionName = "1.0"
     }
+    buildFeatures {
+        buildConfig = true
+    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
     buildTypes {
+        getByName("debug") {
+            val environment = (findProperty("app.environment") as String?) ?: "debug"
+            buildConfigField("String", "APP_ENVIRONMENT", "\"$environment\"")
+        }
         getByName("release") {
             isMinifyEnabled = false
+            val environment = (findProperty("app.environment") as String?) ?: "prod"
+            buildConfigField("String", "APP_ENVIRONMENT", "\"$environment\"")
         }
     }
     compileOptions {
