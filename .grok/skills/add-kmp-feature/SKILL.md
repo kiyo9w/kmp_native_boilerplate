@@ -16,9 +16,10 @@ Read `AGENTS.md` and `docs/CODING.md` first. Copy the catalog slice. Do not inve
 2. Ktor types, cache, and impl in `shared/.../data/`. Settings only for session, last route, or a product flag.
 3. `fun <feature>Module()` in `di/Koin.kt`. Load it from `initKoin`.
 4. ViewModel in `feature/<feature>/` with `@NativeCoroutinesState` on every Flow SwiftUI reads. Loading, error, empty.
-5. Compose screen + `values` / `values-vi` strings + route in `App.kt`.
-6. SwiftUI view + `Localizable.xcstrings` + `NavigationStack` link.
+5. Compose screen + `values` / `values-vi` strings + route in `App.kt`. Use `ThemeTokens` and `KitEmpty` / `KitBanner`.
+6. SwiftUI view + `Localizable.xcstrings` + `NavigationStack` link. Use `KitTheme`.
 7. `commonTest` for domain and repository. `jvmTest` if you touch a `.sq` file.
+8. Loading, populated, empty, and error are all visible. Refresh failure keeps cache and shows a banner.
 
 Shared records `SessionStore.setLastRoute`. Apps own the back stack. ViewModels do not construct `HttpClient`.
 

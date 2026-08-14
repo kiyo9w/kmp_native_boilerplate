@@ -131,4 +131,4 @@ iOS: set `APP_ENVIRONMENT` in `iosApp/Configuration/Config.xcconfig`.
 - `docs/OSS.md` — Flutter-row table and every dependency
 - `docs/decisions/ADR-001-native-stack.md` — why this stack stays
 - `AGENTS.md` — kit locks for the next agent
-- `.grok/skills/` — `add-kmp-feature`, `add-native-bridge`, `kmp-native-guard` (Claude loads the same files via `.claude/skills/` symlinks)
+- `.grok/skills/` — `add-kmp-feature`, `add-native-bridge`, `kmp-native-guard`, `design-tokens`, `api-resilience` (Claude loads the same files via `.claude/skills/` symlinks)

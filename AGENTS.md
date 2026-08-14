@@ -7,7 +7,7 @@ A new product starts by following `docs/ADOPT.md`. A new feature follows `docs/C
 ## Locks
 
 - Shared module: domain, data, Koin, ViewModels, `platform/` bridges.
-- Apps: theme, routing, widgets, string catalogs.
+- Apps: theme, routing, widgets, string catalogs. Spacing, radius, and tap size come from `ThemeTokens`. Colors come from Material3 and SwiftUI semantic colors.
 - Two native UIs. Compose Multiplatform is a different kit. Open an ADR before changing that.
 - Swift reads Flows through KMP-NativeCoroutines. Keep SKIE out so this bridge stays the one SwiftUI path.
 - Navigation lives in Navigation Compose and `NavigationStack`. Shared stores `SessionStore.lastRoute` only.

@@ -50,8 +50,14 @@ Use `.grok/skills/add-native-bridge`. Short form:
 
 - Chrome copy lives in native catalogs. English source, Vietnamese second locale.
 - Both apps follow the system light/dark setting (`Theme.KmpBoilerplate`, SwiftUI default).
-- Hyphen in UI strings, not an em dash.
+- Spacing, radius, duration, and tap size come from `ThemeTokens` (`spaceMd` is 16, `tapMin` is 48). Colors come from the platform scheme.
+- Empty and inline error reuse `KitEmpty` and `KitBanner`. A widget used by two features graduates into `androidApp/.../ui/` or `iosApp/iosApp/KitTheme.swift`.
+- Feature-private widgets sit next to the screen.
+- Every loadable screen shows loading, populated, empty, and error. Refresh failure with cache keeps the list and shows `KitBanner`.
+- Hyphen in UI strings.
 - Apps call `stringResource` / `String(localized:)`. Shared Kotlin stays language-agnostic.
+
+DTO fields the host may omit get defaults (`""`, `0`, `emptyList()`). `Json { ignoreUnknownKeys = true }` is already on the client. Load independent pieces independently.
 
 ## Flavor and crash hook
 

@@ -67,6 +67,8 @@ Add BuildKonfig when a second base URL is real. Gradle product flavors that rena
 
 ## Theme
 
+`ThemeTokens` in shared Kotlin is the spacing, radius, duration, and tap-size scale. Android maps it in `ui/ThemeTokens.android.kt`. iOS maps it in `KitTheme.swift`. Colors stay on Material3 and SwiftUI semantic colors.
+
 Both UIs follow the system light/dark setting.
 
 - Android: `Theme.KmpBoilerplate` (`values` light / `values-night` dark) plus Material3 `isSystemInDarkTheme()`
