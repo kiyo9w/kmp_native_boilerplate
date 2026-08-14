@@ -1,17 +1,20 @@
 package dev.kiyo9w.kmpboilerplate.screens
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import dev.kiyo9w.kmpboilerplate.ui.KitEmpty
 
 @Composable
 fun EmptyScreenContent(
     message: String,
     modifier: Modifier = Modifier,
+    actionLabel: String? = null,
+    onAction: (() -> Unit)? = null,
 ) {
-    Box(modifier = modifier, contentAlignment = Alignment.Center) {
-        Text(message)
-    }
+    KitEmpty(
+        message = message,
+        modifier = modifier,
+        actionLabel = actionLabel,
+        onAction = onAction,
+    )
 }

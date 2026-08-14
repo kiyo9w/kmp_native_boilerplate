@@ -35,6 +35,9 @@ import coil3.compose.AsyncImage
 import dev.kiyo9w.kmpboilerplate.R
 import dev.kiyo9w.kmpboilerplate.domain.catalog.CatalogItem
 import dev.kiyo9w.kmpboilerplate.feature.catalog.CatalogListViewModel
+import dev.kiyo9w.kmpboilerplate.ui.KitBanner
+import dev.kiyo9w.kmpboilerplate.ui.ThemeSpaceSm
+import dev.kiyo9w.kmpboilerplate.ui.ThemeSpaceXs
 import org.koin.compose.viewmodel.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,12 +75,23 @@ fun CatalogListScreen(navigateToDetails: (itemId: Long) -> Unit) {
                 .padding(padding),
         ) {
             when {
-                items.isNotEmpty() -> CatalogGrid(items = items, onItemClick = navigateToDetails)
+                items.isNotEmpty() -> Column(Modifier.fillMaxSize()) {
+                    if (error != null) {
+                        KitBanner(
+                            message = error.orEmpty(),
+                            actionLabel = stringResource(R.string.action_retry),
+                            onAction = viewModel::refresh,
+                        )
+                    }
+                    CatalogGrid(items = items, onItemClick = navigateToDetails)
+                }
                 refreshing -> Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                     CircularProgressIndicator()
                 }
                 else -> EmptyScreenContent(
                     message = error ?: stringResource(R.string.no_data_available),
+                    actionLabel = stringResource(R.string.action_retry),
+                    onAction = viewModel::refresh,
                     modifier = Modifier.fillMaxSize(),
                 )
             }
@@ -98,7 +112,7 @@ private fun CatalogGrid(
         items(items, key = { it.id }) { item ->
             Column(
                 Modifier
-                    .padding(8.dp)
+                    .padding(ThemeSpaceSm)
                     .clickable { onItemClick(item.id) },
             ) {
                 AsyncImage(
@@ -110,7 +124,7 @@ private fun CatalogGrid(
                         .aspectRatio(1f)
                         .background(MaterialTheme.colorScheme.surfaceVariant),
                 )
-                Spacer(Modifier.height(4.dp))
+                Spacer(Modifier.height(ThemeSpaceXs))
                 Text(item.breed, style = MaterialTheme.typography.titleMedium)
                 Text(item.source, style = MaterialTheme.typography.bodySmall)
             }

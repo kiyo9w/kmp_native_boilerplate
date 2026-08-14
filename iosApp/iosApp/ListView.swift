@@ -19,24 +19,34 @@ struct CatalogListView: View {
         NavigationStack {
             Group {
                 if !viewModel.items.isEmpty {
-                    ScrollView {
-                        LazyVGrid(columns: columns, alignment: .leading, spacing: 16) {
-                            ForEach(viewModel.items, id: \.id) { item in
-                                NavigationLink(destination: CatalogDetailView(itemId: item.id)) {
-                                    CatalogFrame(item: item)
-                                }
-                                .buttonStyle(.plain)
-                            }
+                    VStack(spacing: 0) {
+                        if let error = viewModel.errorMessage {
+                            KitBanner(
+                                message: error,
+                                actionLabel: String(localized: "action_retry"),
+                                onAction: { viewModel.refresh() }
+                            )
                         }
-                        .padding(.horizontal)
+                        ScrollView {
+                            LazyVGrid(columns: columns, alignment: .leading, spacing: KitTheme.spaceMd) {
+                                ForEach(viewModel.items, id: \.id) { item in
+                                    NavigationLink(destination: CatalogDetailView(itemId: item.id)) {
+                                        CatalogFrame(item: item)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                            .padding(.horizontal, KitTheme.spaceMd)
+                        }
                     }
                 } else if viewModel.isRefreshing {
                     ProgressView()
                 } else {
-                    Text(viewModel.errorMessage ?? String(localized: "no_data_available"))
-                        .foregroundStyle(.secondary)
-                        .multilineTextAlignment(.center)
-                        .padding()
+                    KitEmpty(
+                        message: viewModel.errorMessage ?? String(localized: "no_data_available"),
+                        actionLabel: String(localized: "action_retry"),
+                        onAction: { viewModel.refresh() }
+                    )
                 }
             }
             .navigationTitle(String(localized: "app_name"))
@@ -51,7 +61,7 @@ struct CatalogListView: View {
                 )
                 .font(.caption)
                 .foregroundStyle(.secondary)
-                .padding(.bottom, 8)
+                .padding(.bottom, KitTheme.spaceSm)
             }
             .refreshable { viewModel.refresh() }
         }
@@ -62,7 +72,7 @@ struct CatalogFrame: View {
     let item: CatalogItem
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 4) {
+        VStack(alignment: .leading, spacing: KitTheme.spaceXs) {
             AsyncImage(url: URL(string: item.imageUrl)) { phase in
                 switch phase {
                 case .empty:
