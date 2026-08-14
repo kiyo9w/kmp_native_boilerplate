@@ -69,7 +69,7 @@ Add BuildKonfig when a second base URL is real. Gradle product flavors that rena
 
 Both UIs follow the system light/dark setting.
 
-- Android: `Theme.DeviceDefault.DayNight.NoActionBar` plus Material3 `isSystemInDarkTheme()`
+- Android: `Theme.KmpBoilerplate` (`values` light / `values-night` dark) plus Material3 `isSystemInDarkTheme()`
 - iOS: SwiftUI default (`preferredColorScheme(nil)`)
 
 Tokens are Material3 color scheme on Android and SwiftUI semantic colors on iOS. There is no shared color XML. A product that needs a locked light theme sets an explicit scheme in each app and writes that lock here.
