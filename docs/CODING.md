@@ -56,6 +56,7 @@ Use `.grok/skills/add-native-bridge`. Short form:
 - Every loadable screen shows loading, populated, empty, and error. Refresh failure with cache keeps the list and shows `KitBanner`.
 - Hyphen in UI strings.
 - Apps call `stringResource` / `String(localized:)`. Shared Kotlin stays language-agnostic.
+- SwiftUI geometry math stays in `CGFloat` end to end. Never convert `size`/`frame` values or indices to `Double` for arithmetic: once one operand is `Double`, literals become ambiguous between `Swift.Double./` and `CoreFoundation.CGFloat./`, and whether that ambiguity is an error depends on the compiler version - it can pass locally and fail CI. Wrap counts with `CGFloat(n)`, not values with `Double(x)`.
 
 DTO fields the host may omit get defaults (`""`, `0`, `emptyList()`). `Json { ignoreUnknownKeys = true }` is already on the client. Load independent pieces independently.
 
